@@ -1,6 +1,7 @@
 html {
   font-size: 10px;
-  background: url(http://s3.amazonaws.com/digitaltrends-uploads-prod/2016/02/forest.jpg);
+  /*background: url(http://s3.amazonaws.com/digitaltrends-uploads-prod/2016/02/forest.jpg);*/
+  background-color: forestgreen;
   background-size: contain;
 }
 body,html {
@@ -14,13 +15,16 @@ div.keys div.key:nth-child(3n - 1) {
 }
 
 .keys {
-  width: 35%;
-  margin: 10% 32%;
-  min-height: 100vh;
+  transform: translate(36%, 20%);
+  /*display: block;
+  width: 50%;
+  margin: 10% auto;*/
+  min-height: 80vh;
   align-items: center;
 }
 
 .key {
+  box-sizing: content-box;
   display: inline-block;
   float: left;
   border: .4rem outset black;
@@ -58,7 +62,8 @@ kbd {
 }
 
 #dial {
-  width: 39.8rem;
+  box-sizing: border-box;
+  width: 41.6rem;
   height: 10rem;
   border: .4rem solid black;
   position: relative;
