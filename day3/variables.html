@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scoped CSS Variables and JS</title>
+</head>
+<body>
+
+  <div class="controls">
+    <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+    <label for="vertical1">Vertical 1:</label>
+    <input id="vertical1" type="color" name="vertical1" value="#7c8ed2">
+
+    <label for="vertical2">Vertical 2:</label>
+    <input id="vertical2" type="color" name="vertical2" value="#d0ffee">
+
+    <label for="horizontal1">Horizontal 1:</label>
+    <input id="horizontal1" type="color" name="horizontal1" value="#d3fe8d">
+
+    <label for="horizontal2">Horizontal 2:</label>
+    <input id="horizontal2" type="color" name="horizontal2" value="#ffc600">
+
+    <label for="vertical1size">Vertical 1 Size:</label>
+    <input id="vertical1size" type="range" name="vertical1size" min="1" max="25" value="6" data-sizing="%">
+
+    <!-- <label for="base">Base Color</label>
+    <input id="base" type="color" name="base" value="#ffc600"> -->
+  </div>
+
+  <div id="vertical">
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+    <div class="stripe vertical">`</div>
+  </div>
+
+  <div id="horizontal">
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+    <div class="stripe horizontal">`</div>
+  </div>
+
+  <style>
+    :root {
+      --vertical1: #7c8ed2;
+      --vertical2: #d0ffee;
+      --horizontal1:  #d3fe8d;
+      --horizontal2: #ffc600;
+      --vertical1size: 6%;
+    }
+
+
+    /*
+      misc styles, nothing to do with CSS variables
+    */
+    #vertical, #horizontal {
+      color: rgba(0,0,0,0);
+    }
+
+    .stripe.vertical {
+      float: left;
+      padding: 50% 6%;
+      padding-left: var(--vertical1size);
+      padding-right: var(--vertical1size);
+      /*height: 100%;*/
+      background-color: var(--vertical1);
+      display: inline-block;
+      /*position: absolute;*/
+      top: 0;
+      left: 0;
+    }
+
+    .stripe.horizontal {
+      opacity: 0.3;
+      z-index: 3;
+      padding: 2% 0;
+      width: 100%;
+      background-color: var(--horizontal1);
+    }
+
+    div.vertical:nth-child(2n) {
+      background-color: var(--vertical2);
+      padding: 50% 2%;
+    }
+
+    div.horizontal:nth-child(2n) {
+      opacity: 0.6;
+      background-color: var(--horizontal2);
+      padding: 0.5% 0;
+    }
+
+    div.horizontal:nth-child(4n) {
+      background-color: rgba(0,0,0,0);
+      padding: 1.2% 0;
+    }
+    body {
+      position: relative;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      /*text-align: center;*/
+      font-family: 'helvetica neue', sans-serif;
+      display: block;
+    }
+
+    .controls {
+      position: absolute;
+      margin-bottom: 50px;
+      z-index: 5;
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      padding: 20px;
+    }
+
+    input {
+      width:100px;
+    }
+  </style>
+
+  <script>
+  const inputs = document.querySelectorAll('.controls input')
+
+  function handleUpdate() {
+    const suffix = this.dataset.sizing || '';
+    console.log(this.name);
+    document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+  }
+
+  inputs.forEach(input => input.addEventListener('change', handleUpdate))
+  inputs.forEach(input => input.addEventListener('mousemove', handleUpdate))
+
+  </script>
+
+</body>
+</html>
