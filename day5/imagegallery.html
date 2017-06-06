@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Gallery</title>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <style>
+    html {
+      box-sizing: border-box;
+      background:#ffc600;
+      font-family:'helvetica neue';
+      font-size: 20px;
+      font-weight: 200;
+    }
+    body {
+      margin: 0;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    .panels {
+      min-height:100vh;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .panel {
+      background:#6B0F9C;
+      box-shadow:inset 0 0 0 5px rgba(255,255,255,0.1);
+      color:white;
+      text-align: center;
+      align-items:center;
+      /* Safari transitionend event.propertyName === flex */
+      /* Chrome + FF transitionend event.propertyName === flex-grow */
+      transition:
+        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        background 0.2s;
+      font-size: 20px;
+      background-size:cover;
+      background-position:center;
+      flex: 1;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    .panel1 { background-image:url(images/BirchTrees.jpg); }
+    .panel2 { background-image:url(images/Family.jpg); }
+    .panel3 { background-image:url(images/Home-full.jpg); }
+    .panel4 { background-image:url(images/Keepsake.jpg); }
+    .panel5 { background-image:url(images/knots/Standoff.jpg); }
+    .panel6 { background-image:url(images/knots/Withhold.jpg); }
+    .panel7 { background-image:url(images/knots/Conceal.jpg); }
+    .panel8 { background-image:url(images/UpInTheSky.jpg); }
+    .panel9 { background-image:url(images/Canada.jpg); }
+    .panel10 { background-image:url(images/DSC_0154.jpg); }
+
+    /* Flex Items */
+    .panel > * {
+      margin:0;
+      width: 100%;
+      transition:transform 0.5s;
+      flex: 1 0 auto;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel > * { transform: translateY(100%); }
+    .panel.open-active > * { transform: translateY(70%); }
+
+    .panel p {
+      display: block;
+      text-transform: uppercase;
+      font-family: 'Amatic SC', cursive;
+      text-shadow:0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+      font-size: 2em;
+    }
+
+    .panel1.open {
+      flex: 10;
+      font-size:40px;
+    }
+    .panel2.open {
+      flex: 5;
+      font-size:40px;
+    }
+    .panel3.open {
+      flex: 25;
+      font-size:40px;
+    }
+    .panel4.open {
+      flex: 15;
+      font-size:40px;
+    }
+    .panel5.open {
+      flex: 17;
+      font-size:40px;
+    }
+    .panel6.open {
+      flex: 5;
+      font-size:40px;
+    }
+    .panel7.open {
+      flex: 17;
+      font-size:40px;
+    }
+    .panel8.open {
+      flex: 8;
+      font-size:40px;
+    }
+    .panel9.open {
+      flex: 18;
+      font-size:40px;
+    }
+    .panel10.open {
+      flex: 29;
+      font-size:40px;
+    }
+
+    p > span {
+      display: block;
+      font-size: 0.5em;
+    }
+
+  </style>
+
+
+  <div class="panels">
+    <div class="panel panel1">
+      <p>Birch Trees <span>Screenprint</span></p>
+    </div>
+    <div class="panel panel2">
+      <p>Family <span>Woodcut</span></p>
+    </div>
+    <div class="panel panel3">
+      <p>Home <span>Reduction Woodcut</span></p>
+    </div>
+    <div class="panel panel4">
+      <p>Keepsake <span>Woodcut and Screenprint with Gold Leaf</span></p>
+    </div>
+    <div class="panel panel5">
+      <p>Standoff <span>Screenprint with Gold Leaf</span></p>
+    </div>
+    <div class="panel panel6">
+      <p>Withhold <span>Screenprint with Gold Leaf</span></p>
+    </div>
+    <div class="panel panel7">
+      <p>Conceal <span>Screenprint with Gold Leaf</span></p>
+    </div>
+    <div class="panel panel8">
+      <p>Up In The Sky <span>Screenprint</span></p>
+    </div>
+    <div class="panel panel9">
+      <p>Canada <span>Mixed Media Screenprint</span></p>
+    </div>
+    <div class="panel panel10">
+      <p>Infinity <span>Screenprint with Cutout</span></p>
+    </div>
+  </div>
+
+  <script>
+    const panels = document.querySelectorAll('.panel');
+
+    function toggleOpen() {
+      this.classList.toggle('open');
+    }
+
+    function toggleActive(e) {
+      console.log(e.propertyName);
+      if (e.propertyName.includes('flex')) {
+        this.classList.toggle('open-active');
+      }
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+  </script>
+
+</body>
+</html>
