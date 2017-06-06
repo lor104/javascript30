@@ -39,7 +39,7 @@ function displayMatches() {
   const html = matchArray.map(color => {
     const regex = new RegExp(this.value, 'gi');
     const colorName = color.name.replace(regex, `<span class="hl">${this.value}</span>`);
-    const hexCode = color.hex.replace(regex, `<span class="hl">${this.value}</span>`);
+
     return `
       <li>
         <span class="name">${colorName}</span>
@@ -50,7 +50,6 @@ function displayMatches() {
   suggestions.innerHTML = html;
   const hexCodeArray = document.querySelectorAll(".hex");
   hexCodeArray.forEach(hex => hex.style.setProperty('background', hex.innerText))
-  console.log(hexCodeArray)
 }
 
 const searchInput = document.querySelector('.search');
