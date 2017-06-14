@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Konami Code</title>
+</head>
+<body>
+
+  <h1>H1 Heading</h1>
+  <h2>H2 Heading</h2>
+  <h3>H3 Heading</h3>
+  <h4>H4 Heading</h4>
+  <h5>H5 Heading</h5>
+  <h6>H6 Heading</h6>
+  <p>P tag</p>
+  <span>SPAN tag</span>
+
+  <p> <strong>Day 12:</strong> KONAMI Code <br> The tutorial video introduced a simple function used to take a string of characters that were enteday12red on the keyboard and recognize if it was the "secret code" stored. If it was, a unicorn or a rainbow would appear. I modified the function to change something on my page instead. See if you can figure it out! <br>
+          </p>
+          <a class="cProject" id="reveal-code" href="#reveal-code">Reveal Code</a>
+
+<script>
+//KONAMI code for keypress recognition
+const pressed = [];
+const secretCode = 'ArrowUpArrowDownArrowUpArrowDownArrowLeftArrowRight';
+
+window.addEventListener('keyup', (e) => {
+pressed.push(e.key);
+//if using word characters (-secretCode.length - 1, pressed.length - secretCode.length)
+pressed.splice(-7, pressed.length - 6);
+if (pressed.join('').includes(secretCode)) {
+  text_replace();
+}
+});
+
+var text_replace = function() {
+// Replace text.
+var hc = 6;
+var hs;
+var h;
+var k;
+var words = ['Delightful','Fantastic','Pleasing','Fun','Magical','Lovely','Captivating','Charming','Amazing','Wonderful'];
+while(hc >= 1) {
+  hs = document.getElementsByTagName('h' + hc);
+  for (k = 0; k < hs.length; k++) {
+    h = hs[k];
+    h.innerHTML = words[Math.floor(Math.random()*words.length)] + ' ' + h.innerHTML;
+    if (hc === 2) {
+      h.class = "border"
+      var inside = h.innerText;
+      h.innerHTML = `<span> ${inside} </span>`;
+    }
+  }
+  hc-=1;
+}
+};
+
+const reveal = document.querySelector('#reveal-code');
+reveal.addEventListener('click', function(e) {
+e.preventDefault;
+reveal.innerText = "↑ ↓ ↑ ↓ ← →";
+reveal.id = "";
+
+})
+</script>
+</body>
+</html>
